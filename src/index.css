@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -11,4 +15,58 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+
+/* general styles */
+
+.page {
+  display: flex;
+}
+
+.page-section {
+  border: 5px solid olivedrab;
+  height: 100vh;
+}
+
+/* factions container */
+
+.factions-section {
+  flex: 7;
+}
+
+.factions-section .faction-meter {
+  width: 30%;
+  padding: 2.25rem;
+  display: inline-block;
+}
+
+.factions-section .faction-meter .faction-meter-mercury {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.factions-section .faction-meter .faction-meter-content {
+  width: 100%;
+  height: 100px;
+  position: relative;
+  border: .5px solid #ccc;
+}
+
+.factions-section .faction-meter .faction-meter-content p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+}
+
+
+/* questions-container */
+
+.question-section {
+  flex: 3;
+  padding: 2rem;
 }
