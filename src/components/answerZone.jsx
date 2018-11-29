@@ -1,10 +1,16 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
-import { ItemTypes } from './Constants';
+import { ItemTypes } from '../constants';
 import { DropTarget } from 'react-dnd';
 
-function collect(connect, monitor) {
+const answerZoneTarget = {
+    drop(props) {
+      props.submitAnswer(props.question.id, props.value, props.currentUser)
+        .then(props.fetchQuestion)
+    }
+  };
+  
+const collect = (connect, monitor) => {
     return {
       connectDropTarget: connect.dropTarget(),
       isOver: monitor.isOver()
@@ -13,14 +19,17 @@ function collect(connect, monitor) {
   
 class AnswerZone extends React.Component {
     render() {
+        const opacity = this.props.isOver ? .5 : 0
+        const backgroundPartial = this.props.value === "yes" ? 'rgba(0,255,0' : 'rgba(255,0,0'
+        const backgroundColor = `${backgroundPartial},${opacity})`
         return this.props.connectDropTarget(
             <div 
-                style={{opacity: this.props.isOver ? 1 : .5}} 
+                style={{ backgroundColor }} 
                 className={"answer-zone " + this.props.side}>
-                {this.props.value}
+                <p>{this.props.value === "yes" ? "Be it so decreed." : "The crown declines."}</p>
             </div>
         )
     }
 }
 
-export default AnswerZone
+export default DropTarget(ItemTypes.DRAG_AVATAR, answerZoneTarget, collect)(AnswerZone)

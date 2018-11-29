@@ -70,3 +70,34 @@ code {
   flex: 3;
   padding: 2rem;
 }
+
+.drag-avatar {
+  margin-top: 5rem;
+}
+
+.answer-zones-wrapper {
+  text-align: center;
+  margin-top: 5rem;
+}
+
+.answer-zone {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  padding: 1rem;
+  text-align: center;
+  border: .5px solid #ccc;
+  vertical-align: top;
+}
+
+.answer-zone.left {
+  margin-right: 30px;
+}
+
+.answer-zone.right {
+  margin-left: 30px;
+}
+
+.answer-zone p {
+  margin: 0;
+}

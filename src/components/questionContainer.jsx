@@ -13,33 +13,20 @@ class QuestionContainer extends React.Component {
         this.props.fetchQuestion()
     }
 
-    handleClick = e => {
-        this.props.submitAnswer(this.props.question.id, e.target.value, this.props.currentUser)
-            .then(this.props.fetchQuestion)
-    }
-
     render() {
         return (
             <div className="page-section question-section">
                 <p className="question">{this.props.question.text}</p>
-                <div className="buttons-container">
-                    <button value="yes" onClick={this.handleClick}>yes</button>
-                    <button value="no" onClick={this.handleClick}>no</button>
-                </div>
                 <DragDropContextProvider backend={HTML5Backend}>
                     <DragAvatar />
                     <div className="answer-zones-wrapper">
                         <AnswerZone 
-                            currentUser={this.props.currentUser}
-                            question={this.props.question} 
+                            {...this.props}
                             side="left"
-                            submitAnswer={this.props.submitAnswer}
                             value="yes" />
                         <AnswerZone 
-                            currentUser={this.props.currentUser}
-                            question={this.props.question} 
+                            {...this.props}
                             side="right"
-                            submitAnswer={this.props.submitAnswer}
                             value="no" />
                     </div>
                 </DragDropContextProvider>
