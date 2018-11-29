@@ -1,12 +1,13 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import request from 'superagent'
-import { DragDropContextProvider } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
+import React from "react"
+import { connect } from "react-redux"
+import request from "superagent"
+import { DragDropContextProvider } from "react-dnd";
+import HTML5Backend from "react-dnd-html5-backend";
 
-import { apiRoot } from '../constants'
+import { apiRoot } from "../constants"
 import DragAvatar from "./dragAvatar"
 import AnswerZone from "./answerZone" 
+import PictureTaker from "./pictureTaker"
 
 class QuestionContainer extends React.Component {
     componentDidMount() {
@@ -30,6 +31,7 @@ class QuestionContainer extends React.Component {
                             value="no" />
                     </div>
                 </DragDropContextProvider>
+                <PictureTaker {...this.props} />
             </div>
         )
     }
@@ -40,7 +42,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         fetchQuestion: () => {
             dispatch({ type: "QUESTION_LOADING" })
             request
-                .get(apiRoot + 'questions/random')
+                .get(apiRoot + "questions/random")
                 .then(
                     resp => {
                         dispatch({
@@ -53,9 +55,47 @@ const mapDispatchToProps = (dispatch, ownProps) => {
                     }
                 )
         },
+        hideCanvas: () => {
+            dispatch({
+                type: "HIDE_CANVAS",
+            })
+        },
+        hidePhotoCapture: () => {
+            dispatch({
+                type: "HIDE_PHOTO_CAPTURE"
+            })
+        },
+        saveImage: canvasData => {
+            dispatch({
+                type: "PHOTO_SAVING"
+            })
+            return request 
+                .post(apiRoot + "portraits")
+                .send({
+                    data: canvasData
+                })
+                .then(
+                    resp => {
+                        dispatch({
+                            type: "PHOTO_SAVED"
+                        })
+                    },
+                    err => {
+                        console.log('dispatching photo saved')
+                        dispatch({
+                            type: "PHOTO_SAVED"
+                        })
+                    }
+                )
+        },
+        showCanvas: () => {
+            dispatch({
+                type: "SHOW_CANVAS",
+            })
+        },
         submitAnswer: (questionId, answer, currentUser) => {
             return request
-                .post(apiRoot + 'token_values')
+                .post(apiRoot + "token_values")
                 .send({
                     answer, 
                     user_id: currentUser.id,
@@ -67,10 +107,40 @@ const mapDispatchToProps = (dispatch, ownProps) => {
                     payload: resp.body
                 })
             })
-        }
+        },
+        takePhoto: () => {
+            // this feature is where it becomes sensible to use thunk
+                // with more time, i would refactor to incorporate async dispatches
+                // current approach is not ideal
+            dispatch({
+                type: "SHOW_PHOTO_CAPTURE"
+            })
+            let countdown = 3
+            const incrementPhotoCountdown = () => {
+                dispatch({
+                    type: "UPDATE_CAPTURE_COUNTDOWN",
+                    payload: countdown
+                })
+                --countdown
+                if (countdown >= 0) {
+                    setTimeout(incrementPhotoCountdown, 500)
+                }
+            }
+            incrementPhotoCountdown()
+
+            // IN PICTURE TAKER 
+                // if countdown is 0,
+                    // take photo
+                    // resize, shade and send to back end
+                    // dispatch new photo url
+
+            // IN ANSWER ZONE
+                // if you got a new photo URL
+                    // submit answer
+        },
     }
 }
 
-const mapStateToProps = ( { currentUser, question } ) => ( { currentUser, question } )
+const mapStateToProps = ( { canvasShowing, currentUser, question } ) => ( { canvasShowing, currentUser, question } )
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionContainer)

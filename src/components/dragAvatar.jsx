@@ -20,7 +20,10 @@ const collect = (connect, monitor) => {
 class DragAvatar extends React.Component {
     render() {
         return this.props.connectDragSource(
-            <p style={{opacity: this.props.isDragging ? 0 : 1}} > ppp </p>
+            <img 
+                className="drag-avatar"
+                src="/crown-solid.svg" 
+                style={{opacity: this.props.isDragging ? 0 : 1}} />
         )
     }
 }

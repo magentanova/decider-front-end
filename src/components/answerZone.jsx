@@ -5,8 +5,11 @@ import { DropTarget } from 'react-dnd';
 
 const answerZoneTarget = {
     drop(props) {
-      props.submitAnswer(props.question.id, props.value, props.currentUser)
-        .then(props.fetchQuestion)
+      props.takePhoto()
+        // .then(() => {
+        //     return props.submitAnswer(props.question.id, props.value, props.currentUser)
+        // })
+        // .then(props.fetchQuestion)
     }
   };
   

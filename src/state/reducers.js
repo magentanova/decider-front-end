@@ -1,18 +1,67 @@
 const initialState = {
+    canvasShowing: false,
     currentUser: {
         id: 1,
         username: "default"
     },
+    photoCaptureShowing: false,
+    photoCaptureCountdown: null,
+    photoSaving: false,
     question: {},
     questionLoading: false,
     tokenValues: [],
     tokenValuesLoading: false
 }
 
+export const canvasShowing = (state=initialState.canvasShowing, action) => {
+    switch (action.type) {
+        case "SHOW_CANVAS": 
+            return true 
+        case "HIDE_CANVAS": 
+            return false
+        default: 
+            return state
+    }
+
+}
+
 // "identity" reducer. we don't have user functionality but we're laying the groundwork
     // for it
 export const currentUser = (state=initialState.currentUser, action) => {
     switch (action.type) {
+        default: 
+            return state
+    }
+}
+
+export const photoCaptureShowing = (state=initialState.photoCaptureShowing, action) => {
+    switch (action.type) {
+        case "SHOW_PHOTO_CAPTURE": 
+            return true 
+        case "HIDE_PHOTO_CAPTURE": 
+            return false
+        default: 
+            return state
+    }
+}
+
+export const photoCaptureCountdown = (state=initialState.photoCaptureCountdown, action) => {
+    switch (action.type) {
+        case "UPDATE_CAPTURE_COUNTDOWN": 
+            return action.payload 
+        case "HIDE_PHOTO_CAPTURE": 
+            return null
+        default: 
+            return state
+    }
+}
+
+export const photoSaving = (state=initialState.photoSaving, action) => {
+    switch (action.type) {
+        case "PHOTO_SAVING": 
+            return true 
+        case "PHOTO_SAVED": 
+            return false
         default: 
             return state
     }

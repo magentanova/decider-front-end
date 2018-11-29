@@ -20,6 +20,15 @@ code {
 
 /* general styles */
 
+.button {
+  outline: none;
+  border-radius: 0;
+  border-image: none;
+  padding: .5rem 1rem;
+  box-shadow: 1px 1px 0.1px 0 #555;
+  cursor: pointer;
+}
+
 .page {
   display: flex;
 }
@@ -73,6 +82,8 @@ code {
 
 .drag-avatar {
   margin-top: 5rem;
+  width: 50px;
+  cursor: pointer;
 }
 
 .answer-zones-wrapper {
@@ -86,7 +97,7 @@ code {
   height: 100px;
   padding: 1rem;
   text-align: center;
-  border: .5px solid #ccc;
+  border: .5px dotted #ccc;
   vertical-align: top;
 }
 
@@ -100,4 +111,19 @@ code {
 
 .answer-zone p {
   margin: 0;
+}
+
+/* picture styling */
+
+.camera-wrapper {
+  margin-top: 3rem;
+}
+
+.shaded-portrait {
+  position: fixed;
+  border: 1px solid #222;
+  box-shadow: 4px 4px 1px 0 #555;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
