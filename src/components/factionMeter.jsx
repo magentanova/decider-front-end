@@ -9,7 +9,6 @@ class FactionMeter extends React.Component {
         const green = value / 100 * 255
         const red = (100 - value) / 100 * 255
         const backgroundColor = `rgba(${red},${green},0,.5)`
-        console.log(backgroundColor)
         return (
             <div className="faction-meter">
                 <div className="faction-meter-content">

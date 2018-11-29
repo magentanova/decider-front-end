@@ -37,6 +37,9 @@ class QuestionContainer extends React.Component {
     }
 }
 
+const mapStateToProps = ( { canvasShowing, currentAnswer, currentUser, imageSaving, question } ) => 
+    ( { canvasShowing, currentAnswer, currentUser, imageSaving, question } )
+
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         fetchQuestion: () => {
@@ -66,8 +69,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             })
         },
         saveImage: canvasData => {
+            console.log('SAVING IMAGE')
             dispatch({
-                type: "PHOTO_SAVING"
+                type: "IMAGE_SAVING"
             })
             return request 
                 .post(apiRoot + "portraits")
@@ -77,16 +81,22 @@ const mapDispatchToProps = (dispatch, ownProps) => {
                 .then(
                     resp => {
                         dispatch({
-                            type: "PHOTO_SAVED"
+                            type: "IMAGE_SAVED"
                         })
                     },
                     err => {
                         console.log('dispatching photo saved')
                         dispatch({
-                            type: "PHOTO_SAVED"
+                            type: "IMAGE_SAVED"
                         })
                     }
                 )
+        },
+        setAnswer: answerVal => {
+            dispatch({
+                type: "SET_CURRENT_ANSWER",
+                payload: answerVal,
+            })
         },
         showCanvas: () => {
             dispatch({
@@ -140,7 +150,5 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
     }
 }
-
-const mapStateToProps = ( { canvasShowing, currentUser, question } ) => ( { canvasShowing, currentUser, question } )
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionContainer)

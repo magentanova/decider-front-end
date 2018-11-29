@@ -11,9 +11,8 @@ class PictureTaker extends React.Component {
     this.takePicture = this.takePicture.bind(this);
   }
 
-  componentDidUpdate() {
-    console.log(this.props.photoCaptureCountdown)
-    if (this.props.photoCaptureCountdown === 0) {
+  componentDidUpdate(oldProps) {
+    if (oldProps.photoCaptureCountdown === 1 && this.props.photoCaptureCountdown === 0) {
         this.camera.capture()
             .then(blob => {
                 this.img.src = URL.createObjectURL(blob);

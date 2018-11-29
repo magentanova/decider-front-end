@@ -31,17 +31,34 @@ code {
 
 .page {
   display: flex;
+  padding: 5rem 0;
+  max-width: 900px;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+/* mobile setting */
+@media (max-width: 900px) {
+  .page {
+    flex-direction: column;
+  }
+  .page .factions-section {
+    order: 2;
+    border-right: none;
+    border-top: 1px solid #555;
+  }
 }
 
 .page-section {
-  border: 5px solid olivedrab;
-  height: 100vh;
+
 }
 
 /* factions container */
 
 .factions-section {
-  flex: 7;
+  flex: 6;
+  border-right: 1px solid #555;
 }
 
 .factions-section .faction-meter {

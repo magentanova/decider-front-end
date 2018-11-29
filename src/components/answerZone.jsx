@@ -2,9 +2,11 @@ import React from 'react'
 
 import { ItemTypes } from '../constants';
 import { DropTarget } from 'react-dnd';
+import { dispatch } from 'rxjs/internal/observable/range';
 
 const answerZoneTarget = {
     drop(props) {
+      props.setAnswer(props.value)
       props.takePhoto()
         // .then(() => {
         //     return props.submitAnswer(props.question.id, props.value, props.currentUser)
@@ -21,6 +23,15 @@ const collect = (connect, monitor) => {
   }
   
 class AnswerZone extends React.Component {
+    componentDidUpdate(prevProps) {
+        console.log(prevProps.imageSaving, this.props.imageSaving, this.props.currentAnswer, this.props.value)
+        if (prevProps.imageSaving && !this.props.imageSaving && this.props.currentAnswer == this.props.value) {
+            console.log("SUBMITTING ANSWER")
+            this.props.submitAnswer(this.props.question.id, this.props.value, this.props.currentUser)
+                .then(this.props.fetchQuestion)
+        }
+    }
+
     render() {
         const opacity = this.props.isOver ? .5 : 0
         const backgroundPartial = this.props.value === "yes" ? 'rgba(0,255,0' : 'rgba(255,0,0'

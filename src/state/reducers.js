@@ -1,12 +1,13 @@
 const initialState = {
     canvasShowing: false,
+    currentAnswer: null,
     currentUser: {
         id: 1,
         username: "default"
     },
     photoCaptureShowing: false,
     photoCaptureCountdown: null,
-    photoSaving: false,
+    imageSaving: false,
     question: {},
     questionLoading: false,
     tokenValues: [],
@@ -22,7 +23,16 @@ export const canvasShowing = (state=initialState.canvasShowing, action) => {
         default: 
             return state
     }
+}
 
+
+export const currentAnswer = (state=initialState.currentAnswer, action) => {
+    switch (action.type) {
+        case "SET_CURRENT_ANSWER": 
+            return action.payload 
+        default: 
+            return state
+    }
 }
 
 // "identity" reducer. we don't have user functionality but we're laying the groundwork
@@ -56,11 +66,11 @@ export const photoCaptureCountdown = (state=initialState.photoCaptureCountdown, 
     }
 }
 
-export const photoSaving = (state=initialState.photoSaving, action) => {
+export const imageSaving = (state=initialState.imageSaving, action) => {
     switch (action.type) {
-        case "PHOTO_SAVING": 
+        case "IMAGE_SAVING": 
             return true 
-        case "PHOTO_SAVED": 
+        case "IMAGE_SAVED": 
             return false
         default: 
             return state
