@@ -5,8 +5,6 @@ jobs:
       # specify the version you desire here
       - image: circleci/node:11.3.0
       
-    working_directory: ~/repo
-
     steps:
       - checkout
 
@@ -17,22 +15,15 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: yarn install
+      - run: yarn install && yarn build
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-        
-      # run tests!
-      - run: yarn test
 
-  dependencies:
-      override:
-          - sudo pip install awscli
-          
-  deployment:
-    prod:
-      branch: master
-      commands:
-        - aws s3 sync /home/ubuntu/decider s3://jr-hosting --delete
+      - run: pip install awscli
+      
+      - deploy: 
+          name: deploy to s3
+          command: - aws s3 sync /home/ubuntu/decider s3://jr-hosting --delete
