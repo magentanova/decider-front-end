@@ -26,4 +26,4 @@ jobs:
 
       - run: sudo apt install python-pip && sudo pip install awscli
       
-      - run: aws s3 sync "${HOME}/${CIRCLE_PROJECT_REPONAME}" s3://jr-hosting/ --delete
+      - run: aws s3 sync /home/circleci/project/public s3://jr-hosting/ --delete
