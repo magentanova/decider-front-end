@@ -45,7 +45,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         fetchQuestion: () => {
             dispatch({ type: "QUESTION_LOADING" })
             request
-                .get(apiRoot + "questions/random")
+                .get(apiRoot + "questions/random?nocache=" + parseInt(Math.random() * 100000))
                 .then(
                     resp => {
                         dispatch({
