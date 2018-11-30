@@ -22,7 +22,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run: apt install python-pip && pip install awscli
+      - run: sudo apt install python-pip && sudo pip install awscli
       
       - deploy: 
           name: deploy to s3
