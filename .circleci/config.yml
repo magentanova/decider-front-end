@@ -26,5 +26,4 @@ jobs:
       
       - deploy: 
           name: deploy to s3
-          command: 
-            - aws s3 sync /home/ubuntu/decider s3://jr-hosting --delete
+          command: aws s3 sync /home/ubuntu/decider s3://jr-hosting --delete
