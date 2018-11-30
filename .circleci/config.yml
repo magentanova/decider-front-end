@@ -26,4 +26,4 @@ jobs:
       
       - deploy: 
           name: deploy to s3
-          command: aws s3 sync "${HOME}/${CIRCLE_PROJECT_REPONAME}/build" s3://jr-hosting/ --delete
+          command: aws s3 sync "${HOME}/${CIRCLE_PROJECT_REPONAME}" s3://jr-hosting/ --delete
