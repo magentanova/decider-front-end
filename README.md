@@ -1,44 +1,21 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Decider Front End
 
-## Available Scripts
+## About 
 
-In the project directory, you can run:
+This application is the UI layer for the Decider app at https://github.com/magentanova/decider. It provides a visual interface for the question-answering/token-advancement functionality exposed by Decider. 
 
-### `npm start`
+While the mechanics of Decider can be adapted to any paradigm, this app presents us with the playful scenario of a monarch hearing requests and nonchalantly waving a hand in the direction of "yes" or "no". The monarch's job isn't all that easy, though, as each decision will affect the crown's approval rating with one of multiple factions within the kingdom. These escalating and decreasing approval ratings are visualized as meters that fill and empty. The color of the meter becomes greener the fuller it gets and redder the emptier it gets. 
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This app also takes the monarch's picture after each question, processes it with a GLSL shader, then displays the royal portrait for a few seconds before sending it to the back end. 
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Running Locally
 
-### `npm test`
+Note that in order for the project to run locally, you should have the back-end application for Decider running on the same machine. If you run `yarn start`, this app will assume that the back-end server is running on `localhost:5000`, which is the default for that app when run with `python run.py`. 
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  - `cd` into the project root. 
+  - `yarn install` 
+  - `yarn start`
 
-### `npm run build`
+## Using the UI 
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Pretty straightforward. Drag the crown into one of the two zones positioned below it. After that, your picture will be taken. Then you'll see the meters fill again. A new question will appear. See above. 
