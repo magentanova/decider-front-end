@@ -21,6 +21,8 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+      
+      - run: echo CURRENT DIR `pwd`
 
       - run: sudo apt install python-pip && sudo pip install awscli
       
